@@ -6,7 +6,7 @@ export const Footer = () => {
 		<div className='fixed bottom-0 w-full p-4 border-t bg-slate-100'>
 			<div className='md:max-w-screen-2xl mx-auto flex items-center w-full justify-between'>
 				<Logo />
-				<div className='md:space-x-4 md:block md:w-auto flex items-center justify-center flex-wrap w-full md:flex-nowrap md:justify-between'>
+				<div className='md:space-x-4 md:block md:w-auto flex justify-center flex-wrap'>
 					<Button size='sm' variant='ghost'>
 						Политика конфиденциальности
 					</Button>

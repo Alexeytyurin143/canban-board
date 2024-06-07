@@ -10,9 +10,14 @@ const headingFont = Montserrat({
 
 const Logo = () => {
 	return (
-		<Link href='/'>
-			<div className='hover:opacity-75 transition items-center gap-x-2 hidden md:flex'>
-				<Image src='/logo.svg' alt='Logo' height={30} width={30} />
+		<Link href='/' className='hidden md:flex'>
+			<div className='hover:opacity-75 transition items-center gap-x-2 flex'>
+				<Image
+					src='/static/logo.svg'
+					alt='Logo'
+					height={30}
+					width={30}
+				/>
 				<p
 					className={cn(
 						'text-large text-neutral-700',
