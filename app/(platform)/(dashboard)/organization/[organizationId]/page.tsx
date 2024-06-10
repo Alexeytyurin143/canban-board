@@ -1,4 +1,21 @@
-const OrganizationIdPage = () => {
-	return <div>Organization Page</div>
+import { create } from '@/actions/createBoard/create-board'
+import { Button } from '@/components/ui/button'
+import { db } from '@/lib/db'
+import { Board } from './_components/Board'
+import { Form } from './_components/Form'
+
+const OrganizationIdPage = async () => {
+	const boards = await db.board.findMany()
+
+	return (
+		<div className='flex flex-col space-y-4'>
+			<Form />
+			<div className='space-y-2'>
+				{boards.map((board) => (
+					<Board key={board.id} id={board.id} title={board.title} />
+				))}
+			</div>
+		</div>
+	)
 }
 export default OrganizationIdPage
