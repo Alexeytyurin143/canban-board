@@ -1,19 +1,5 @@
-import { db } from '@/lib/db'
-import { Board } from './_components/Board'
-import { Form } from './_components/Form'
-
 const OrganizationIdPage = async () => {
-	const boards = await db.board.findMany()
-
-	return (
-		<div className='flex flex-col space-y-4'>
-			<Form />
-			<div className='space-y-2'>
-				{boards.map((board) => (
-					<Board key={board.id} id={board.id} title={board.title} />
-				))}
-			</div>
-		</div>
-	)
+	return <div className='flex flex-col space-y-4'></div>
 }
+
 export default OrganizationIdPage

@@ -5,8 +5,17 @@ import { db } from '@/lib/db'
 import { revalidatePath } from 'next/cache'
 import { createSafeAction } from '@/lib/createSafeAction'
 import { CreateBoard } from './schema'
+import { auth } from '@clerk/nextjs/server'
 
 const handler = async (data: InputType): Promise<ReturnType> => {
+	const { userId } = auth()
+
+	if (!userId) {
+		return {
+			error: 'Unauthorized',
+		}
+	}
+
 	const { title } = data
 
 	let board
