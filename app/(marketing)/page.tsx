@@ -1,7 +1,7 @@
 import localFont from 'next/font/local'
 import Link from 'next/link'
 import { Medal } from 'lucide-react'
-import { Nunito_Sans, Montserrat } from 'next/font/google'
+import { Nunito, Montserrat } from 'next/font/google'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -10,7 +10,7 @@ const headingFont = Montserrat({
 	weight: ['600'],
 })
 
-const textFont = Nunito_Sans({
+const textFont = Nunito({
 	subsets: ['cyrillic'],
 	weight: ['400'],
 })

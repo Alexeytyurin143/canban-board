@@ -1,21 +1,24 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 
-const isPublicRoute = createRouteMatcher(['/', '/sign-in(.*)', '/sign-up(.*)'])
-
-const isStaticRoute = createRouteMatcher(['/static(.*)'])
+const isPublicRoute = createRouteMatcher([
+	'/',
+	'/sign-in(.*)',
+	'/sign-up(.*)',
+	'/static(.*)',
+])
 
 export default clerkMiddleware((auth, req) => {
 	const { userId, orgId } = auth()
 	if (userId && isPublicRoute(req)) {
 		let path = '/select-org'
 		if (orgId) {
-			path = `organization/${orgId}`
+			path = `/organization/${orgId}`
 		}
 		const orgSelection = new URL(path, req.url)
 		return NextResponse.redirect(orgSelection)
 	}
-	if (!userId && !isPublicRoute(req) && !isStaticRoute(req)) {
+	if (!userId && !isPublicRoute(req)) {
 		auth().protect()
 	}
 	if (userId && !orgId && req.nextUrl.pathname !== '/select-org') {
@@ -25,5 +28,5 @@ export default clerkMiddleware((auth, req) => {
 })
 
 export const config = {
-	matcher: ['/((?!.+.[w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
+	matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
 }
