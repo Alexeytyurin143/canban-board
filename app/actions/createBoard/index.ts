@@ -8,15 +8,38 @@ import { CreateBoard } from './schema'
 import { auth } from '@clerk/nextjs/server'
 
 const handler = async (data: InputType): Promise<ReturnType> => {
-	const { userId } = auth()
+	const { userId, orgId } = auth()
 
-	if (!userId) {
+	if (!userId || !orgId) {
 		return {
 			error: 'Unauthorized',
 		}
 	}
 
-	const { title } = data
+	const { title, image } = data
+
+	const [imageId, imageThumbUrl, imageFullUrl, imageLinkHTML, imageUserName] =
+		image.split('|')
+
+	console.log({
+		imageId,
+		imageThumbUrl,
+		imageFullUrl,
+		imageLinkHTML,
+		imageUserName,
+	})
+
+	if (
+		!imageId ||
+		!imageThumbUrl ||
+		!imageFullUrl ||
+		!imageUserName ||
+		!imageLinkHTML
+	) {
+		return {
+			error: 'Недостаточно данных. Ошибка при создании доски.',
+		}
+	}
 
 	let board
 
@@ -24,6 +47,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 		board = await db.board.create({
 			data: {
 				title,
+				orgId,
+				imageId,
+				imageThumbUrl,
+				imageFullUrl,
+				imageUserName,
+				imageLinkHTML,
 			},
 		})
 	} catch (error) {
