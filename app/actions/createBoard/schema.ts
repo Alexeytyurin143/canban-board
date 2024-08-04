@@ -9,4 +9,8 @@ export const CreateBoard = z.object({
 		.min(3, {
 			message: 'Длина названия должна быть не меньше 3-х символов',
 		}),
+	image: z.string({
+		required_error: 'Изображение обязательно',
+		invalid_type_error: 'Изображение обязательно',
+	}),
 })
