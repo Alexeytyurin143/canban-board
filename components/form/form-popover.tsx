@@ -11,7 +11,7 @@ import {
 import { FormInput } from './form-input'
 import { FormSubmit } from './form-submit'
 import { useAction } from '@/hooks/useAction'
-import { createBoard } from '@/app/actions/createBoard'
+import { createBoard } from '@/app/actions/create-board'
 import { toast } from 'sonner'
 import { FormPicker } from './form-picker'
 import { ElementRef, useRef } from 'react'
